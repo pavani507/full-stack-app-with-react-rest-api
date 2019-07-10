@@ -16,6 +16,7 @@ class UpdatedCourse extends Component {
   componentDidMount() {
     this.handleGetCourse();
   }
+  // Receive Updated Course data input by User
 
   handleInputChange = e => {
     const inputField = e.target;
@@ -24,7 +25,6 @@ class UpdatedCourse extends Component {
       [inputField.name]: inputField.value
     });
   };
-
   handleGetCourse = () => {
     axios
       .get("http://localhost:5000/api/courses/" + this.props.match.params.id)
@@ -56,6 +56,7 @@ class UpdatedCourse extends Component {
         }
       });
   };
+  //An "Update Course" button that when clicked sends a PUT request to the REST API's /api/courses/:id route
 
   handleUpdateCourse = (e, user, password) => {
     e.preventDefault();
@@ -109,7 +110,8 @@ class UpdatedCourse extends Component {
             validationErrors: ""
           });
 
-          console.log(`${this.state.title} has been updated.`);
+          // Show course details after updating
+
           this.props.history.push("/courses");
         })
 
@@ -126,10 +128,10 @@ class UpdatedCourse extends Component {
         });
     }
   };
-
+  // this function returns the user to the "Course Detail" screen.
   handleCancel = e => {
     e.preventDefault();
-    this.props.history.push("/courses");
+    this.props.history.push("/courses/" + this.props.match.params.id);
   };
 
   render() {

@@ -11,21 +11,20 @@ class Courses extends Component {
   componentDidMount() {
     this.getCourses();
   }
+  //Retrieves the list of courses from the REST API
   getCourses = () => {
     fetch("http://localhost:5000/api/courses")
       .then(response => response.json())
       .then(res => {
         const courses = res.courses;
-        console.log(courses);
         this.setState({ courses });
       })
       .catch(err => {
-        if (err.res.status === 404) {
-          console.log(err.res);
-          // this.props.history.push("/notfound");
+        if (err.response.status === 404) {
+          console.log("error" + err.response);
+          this.props.history.push("/notfound");
         } else {
-          console.log(err);
-          //this.props.history.push("/error");
+          this.props.history.push("/error");
         }
       });
   };

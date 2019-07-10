@@ -16,7 +16,7 @@ class CourseDetail extends Component {
   componentDidMount() {
     this.handleGetCourse();
   }
-
+  // Retrieves the detail for a course from the REST API.
   handleGetCourse = () => {
     axios
       .get("http://localhost:5000/api/courses/" + this.props.match.params.id)
@@ -36,7 +36,7 @@ class CourseDetail extends Component {
         });
       });
   };
-
+  // When clicked sends a DELETE request to the REST API to delete a course
   handleDeleteCourse = e => {
     e.preventDefault();
 

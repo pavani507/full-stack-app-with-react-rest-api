@@ -16,18 +16,19 @@ import UserSignOut from "./components/UserSignOut";
 import UpdateCourse from "./components/UpdateCourse";
 import PrivateRoute from "./components/PrivateRoute";
 
-import Forbidden from "./components/Forbidden";
 import UnHandleError from "./components/UnHandleError";
-import NotFound from "./components/NotFound";
 
 class App extends Component {
   state = {
     validationErrors: ""
   };
+  // Signin authentication, data persisting
+
   handleSignIn = (e, email, password, props) => {
     if (e) {
       e.preventDefault();
     }
+    // Authenticate user by request to REST API's users endpoint
 
     axios
       .get(
@@ -59,7 +60,6 @@ class App extends Component {
           });
 
           const path = "/";
-          console.log("props in signin: ", props);
           props.history.push(path);
         }
       })
@@ -78,9 +78,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          {/*  <Header />*/}
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/courses" />} />
+            {/* Route for User SignIn, SignUp, SignOut */}
+
             <Route
               path="/signin"
               render={() => (
@@ -101,17 +102,22 @@ class App extends Component {
                 />
               )}
             />
+            {/* Route for all Courses */}
             <Route exact path="/courses" render={() => <Courses />} />
-            <PrivateRoute path="/courses/create" component={CreateCourse} />
+            {/* Route to view individual course */}
+            <PrivateRoute
+              exact
+              path="/courses/create"
+              component={CreateCourse}
+            />
             <Route exact path="/courses/:id" component={CourseDetail} />
+            {/* Private routes for auth'd users to Create Course, Update Course */}
             <PrivateRoute
               exact
               path="/courses/:id/update"
               component={UpdateCourse}
             />
-            <Route path="/forbidden" component={Forbidden} />
             <Route path="/error" component={UnHandleError} />
-            <Route path="/notfound" component={NotFound} />
           </Switch>
         </div>
       </Router>

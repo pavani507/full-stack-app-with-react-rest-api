@@ -8,6 +8,7 @@ class UserSignIn extends Component {
     password: "",
     validationErrors: ""
   };
+  // Receives SignIn data input by User
 
   handleInputChange = e => {
     const inputField = e.target;

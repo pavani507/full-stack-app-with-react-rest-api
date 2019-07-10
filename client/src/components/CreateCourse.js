@@ -4,6 +4,7 @@ import axios from "axios";
 import "../global.css";
 
 class CreateCourse extends Component {
+  // Initialize state for new Course details
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,6 @@ class CreateCourse extends Component {
       materialsNeeded: "",
       errors: ""
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   change = event => {
@@ -21,7 +21,7 @@ class CreateCourse extends Component {
       [event.target.name]: event.target.value
     });
   };
-
+  //Sends a POST request to the REST API's /api/courses route
   handleSubmit = evt => {
     evt.preventDefault();
 

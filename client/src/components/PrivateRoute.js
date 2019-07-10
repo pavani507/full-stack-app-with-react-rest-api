@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+//// Private routes for authorized actions '/courses/create' and '/courses/:id/update'
 
 export default function PrivateRoute({ component: Component, ...rest }) {
   return (

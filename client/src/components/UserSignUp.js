@@ -11,6 +11,7 @@ class UserSignUp extends Component {
     confirmPassword: "",
     validationErrors: ""
   };
+  // Receives SignIn data input by User
 
   handleInputChange = e => {
     const inputField = e.target;
@@ -19,12 +20,12 @@ class UserSignUp extends Component {
       [inputField.name]: inputField.value
     });
   };
-
+  // A "Cancel" button that returns the user to the default route (i.e. the list of courses).
   handleCancel = e => {
     e.preventDefault();
     this.props.history.push("/courses");
   };
-
+  //A user to sign up by creating a new account.
   handleSignUp(e) {
     e.preventDefault();
 
@@ -36,6 +37,8 @@ class UserSignUp extends Component {
       confirmPassword
     } = this.state;
 
+    // Check password for correctness before submitting new user
+
     if (password === "") {
       this.setState({
         validationErrors: "You must enter a password."
@@ -45,6 +48,7 @@ class UserSignUp extends Component {
         validationErrors: "Passwords do not match."
       });
     } else {
+      //A "Sign Up" button that when clicked sends a POST request to the REST API's /api/users route.
       var url = "http://localhost:5000/api/users";
       var data = { firstName, lastName, emailAddress, password };
 
@@ -62,20 +66,15 @@ class UserSignUp extends Component {
               validationErrors: ""
             });
 
-            this.props.signin(null, emailAddress, password);
+            this.props.signIn(null, emailAddress, password, this.props);
           }
         })
         .catch(err => {
-          console.log(err.response.status);
-          if (err.response.status === 400) {
-            const error = err.response.data.message;
+          const error = err && err.response && err.response.data.message;
 
-            this.setState({
-              validationErrors: error
-            });
-          } else if (err.response.status === 500) {
-            this.props.history.push("/error");
-          }
+          this.setState({
+            validationErrors: error
+          });
         });
     }
   }

@@ -1,6 +1,6 @@
 const UserSignOut = () => {
   localStorage.clear();
-  window.location.href = "/signin";
+  window.location.href = "/";
   return null;
 };
 
