@@ -31,7 +31,6 @@ class UpdatedCourse extends Component {
 
       .then(res => {
         const course = res.data.course;
-        console.log(course.userId);
 
         if (course.userId !== parseInt(localStorage.getItem("id"))) {
           this.props.history.push("/forbidden");

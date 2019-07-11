@@ -21,7 +21,6 @@ class Courses extends Component {
       })
       .catch(err => {
         if (err.response.status === 404) {
-          console.log("error" + err.response);
           this.props.history.push("/notfound");
         } else {
           this.props.history.push("/error");

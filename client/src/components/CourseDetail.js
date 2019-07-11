@@ -27,7 +27,7 @@ class CourseDetail extends Component {
         this.setState({
           course,
           courseId: course.id,
-          createdBy: course.User.id
+          createdBy: course.User
         });
       })
       .catch(err => {
@@ -56,7 +56,6 @@ class CourseDetail extends Component {
       )
       .then(res => {
         this.props.history.push("/courses");
-        console.log("Course successfully deleted");
       })
       .catch(err => {
         if (err.response.status === 404) {
@@ -76,6 +75,7 @@ class CourseDetail extends Component {
       materialsNeeded
     } = this.state.course;
     const { createdBy, validationErrors } = this.state;
+    const { id: creatorId, firstName, lastName } = createdBy || {};
 
     return (
       <div id="root">
@@ -86,7 +86,7 @@ class CourseDetail extends Component {
               <div className="bounds">
                 <div className="grid-100">
                   {localStorage.getItem("id") !== "" &&
-                  parseInt(localStorage.getItem("id")) === createdBy ? (
+                  parseInt(localStorage.getItem("id")) === creatorId ? (
                     <span>
                       <Link
                         className="button"
@@ -140,7 +140,7 @@ class CourseDetail extends Component {
                   )}
 
                   <h3 className="course--title">{title}</h3>
-                  <p>By {localStorage.getItem("name")}</p>
+                  <p>By {`${firstName} ${lastName}`}</p>
                 </div>
                 <div className="course--description">
                   <ReactMarkDown source={description} />

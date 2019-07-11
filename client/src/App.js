@@ -45,8 +45,6 @@ class App extends Component {
         if (res.status === 200) {
           const user = res.data;
 
-          console.log("user data: ", user);
-
           const name = user.firstName + " " + user.lastName;
 
           window.localStorage.setItem("id", user.id);
