@@ -9,7 +9,7 @@ router.get("/", authenticateUser, (req, res) => {
   res.status(200);
   res.json({
     id: req.currentUser.id,
-    firstName: req.currentUser.emailAddress,
+    firstName: req.currentUser.firstName,
     lastName: req.currentUser.lastName,
     emailAddress: req.currentUser.emailAddress
   });

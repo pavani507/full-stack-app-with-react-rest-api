@@ -6,10 +6,8 @@ module.exports = (req, res, next) => {
   let message = null;
 
   const credentials = auth(req);
-  console.log("credentials: ", credentials);
 
   if (credentials && credentials.name && credentials.pass) {
-    console.log(credentials);
     User.findOne({ where: { emailAddress: credentials.name } }).then(user => {
       if (user) {
         const authenticated = bcryptjs.compareSync(
